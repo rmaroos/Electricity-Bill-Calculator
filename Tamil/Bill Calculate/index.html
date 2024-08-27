@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Consumption</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2> மின் நுகர்வு கணிப்பான்</h2>
+        <label for="previousMeter">முந்தைய மீட்டர் வாசிப்பு (kWh):</label>
+        <input type="number" id="previousMeter" placeholder="முந்தைய மீட்டர் வாசிப்பினை உள்ளிடவும்">
+		<label for="currentMeter">தற்போதைய மீட்டர் வாசிப்பு(kWh):</label>
+        <input type="number" id="currentMeter" placeholder="தற்போதைய மீட்டர் வாசிப்பினை  உள்ளிடவும்">
+        <button onclick="calculateConsumption()">நுகர்வினை கணக்கிடுங்கள்</button>
+        <p id="consumptionResult">நுகர்வு <span id="consumption"></span> kWh</p>
+        <p id="errorMessage" style="color: red; font-size:13px;"></p>
+        <button id="calculateBillBtn" onclick="redirectToBillPage()" disabled>சிட்டையை கணக்கிடுங்கள்</button>
+        <button id="backBtn" onclick="goBack()">பிரதான பக்கத்திற்கு செல்ல</button>
+    </div>
+
+    <footer>
+        &copy; 2024 எளிதான மின்சார பில் கால்குலேட்டர் | திறமையான ஆற்றல் மேலாண்மைக்காக வடிவமைக்கப்பட்டுள்ளது
+    </footer>
+
+    <script>
+        function calculateConsumption() {
+            const currentMeter = parseFloat(document.getElementById('currentMeter').value);
+            const previousMeter = parseFloat(document.getElementById('previousMeter').value);
+            const errorMessage = document.getElementById('errorMessage');
+            const consumptionElement = document.getElementById('consumption');
+
+            errorMessage.innerText = "";
+            consumptionElement.innerText = "";
+
+            if (isNaN(currentMeter) || isNaN(previousMeter)) {
+                errorMessage.innerText = "சரியான மீட்டர் அளவீடுகளை உள்ளிடவும்.";
+                return;
+            }
+
+            if (currentMeter < previousMeter) {
+                errorMessage.innerText = "பிழை: முந்தைய மீட்டர் வாசிப்பு தற்போதைய மீட்டர் வாசிப்பை விட அதிகமாக இருக்கக்கூடாது, தயவுசெய்து அதைச் சரிபார்க்கவும்.";
+                return;
+            }
+
+            const consumption = currentMeter - previousMeter;
+            consumptionElement.innerText = consumption.toFixed(1);
+
+            if (consumption > 100) {
+                errorMessage.innerText = "எச்சரிக்கை: உங்கள் மின் நுகர்வு அதிகமாக உள்ளது.";
+            }
+
+            document.getElementById('calculateBillBtn').disabled = false;
+            localStorage.setItem('consumption', consumption.toFixed(0));
+            localStorage.setItem('previousMeter', currentMeter.toFixed(0));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedPreviousMeter = localStorage.getItem('previousMeter');
+            if (savedPreviousMeter) {
+                document.getElementById('previousMeter').value = savedPreviousMeter;
+            }
+        });
+
+        function redirectToBillPage() {
+            window.location.href = 'bill.html';
+        }
+
+        function goBack() {
+            window.location.href = '../Home/home.html'; 
+        }
+    </script>
+</body>
+</html>

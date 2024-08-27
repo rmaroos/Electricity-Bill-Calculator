@@ -1,0 +1,204 @@
+/* Global Styles */
+body {
+    background-color: #f0f8ff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+header {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 32px;
+    margin: 0;
+    text-align: center;
+}
+
+.home-button {
+    background-color: #0056b3;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #003452;
+}
+
+/* Table Section Styles */
+.table-section {
+    margin: 40px auto;
+    width: 90%;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 40px;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table Captions */
+.domestic-tb caption {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+.religious-tb caption {
+    background-color: #28A745;
+    color: #fff;
+}
+
+.industries-tb caption {
+    background-color: #FFC107;
+    color: #fff;
+}
+
+.business-tb caption {
+    background-color: #DC3545;
+    color: #fff;
+}
+
+.hotel-tb caption {
+    background-color: #6F42C1;
+    color: #fff;
+}
+
+.government-tb caption {
+    background-color: #17A2B8;
+    color: #fff;
+}
+
+caption {
+    font-size: 20px;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Table Header and Body */
+thead {
+    background-color: #f2f2f2;
+}
+
+th {
+    padding: 12px;
+    text-align: left;
+    background-color: #f8f9fa;
+}
+
+td {
+    padding: 12px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.subheader {
+    font-weight: bold;
+    background-color: #e9ecef;
+}
+
+/* Info Section Styles */
+.info-section {
+    margin: 20px auto;
+    padding: 20px;
+    width: 90%;
+    background-color: #fbfbfb;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.info-section p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 8px 10px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+
+/* References Section Styles */
+.references-section {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px auto;
+    width: 90%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Reference Card Styles */
+.reference-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 45%;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reference-card h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.reference-card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.reference-link {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.reference-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.reference-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}

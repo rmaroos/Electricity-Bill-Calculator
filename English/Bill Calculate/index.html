@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Consumption</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Electricity Consumption Calculator</h2>
+        <label for="previousMeter">Previous Meter Reader (kWh):</label>
+        <input type="number" id="previousMeter" placeholder="Enter previous meter reading">
+		<label for="currentMeter">Current Meter Reader (kWh):</label>
+        <input type="number" id="currentMeter" placeholder="Enter current meter reading">
+        <button onclick="calculateConsumption()">Calculate Consumption</button>
+        <p id="consumptionResult">Consumption: <span id="consumption"></span> kWh</p>
+        <p id="errorMessage" style="color: red; font-size:13px;"></p>
+        <button id="calculateBillBtn" onclick="redirectToBillPage()" disabled>Calculate the Bill</button>
+        <button id="backBtn" onclick="goBack()">Back to Home Page</button>
+    </div>
+
+    <footer>
+        &copy; 2024 Easy Electricity Bill Calculator | Designed for efficient energy management
+    </footer>
+
+    <script>
+        function calculateConsumption() {
+            const currentMeter = parseFloat(document.getElementById('currentMeter').value);
+            const previousMeter = parseFloat(document.getElementById('previousMeter').value);
+            const errorMessage = document.getElementById('errorMessage');
+            const consumptionElement = document.getElementById('consumption');
+
+            errorMessage.innerText = "";
+            consumptionElement.innerText = "";
+
+            if (isNaN(currentMeter) || isNaN(previousMeter)) {
+                errorMessage.innerText = "Please enter valid meter readings.";
+                return;
+            }
+
+            if (currentMeter < previousMeter) {
+                errorMessage.innerText = "Error: Previous meter reading cannot be more than current meter reading, please check it.";
+                return;
+            }
+
+            const consumption = currentMeter - previousMeter;
+            consumptionElement.innerText = consumption.toFixed(1);
+
+            if (consumption > 100) {
+                errorMessage.innerText = "Warning: Your electricity consumption is high.";
+            }
+
+            document.getElementById('calculateBillBtn').disabled = false;
+            localStorage.setItem('consumption', consumption.toFixed(0));
+            localStorage.setItem('previousMeter', currentMeter.toFixed(0));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedPreviousMeter = localStorage.getItem('previousMeter');
+            if (savedPreviousMeter) {
+                document.getElementById('previousMeter').value = savedPreviousMeter;
+            }
+        });
+
+        function redirectToBillPage() {
+            window.location.href = 'bill.html';
+        }
+
+        function goBack() {
+            window.location.href = '../Home/home.html'; 
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    background: url('bdy.jpg') center/cover no-repeat;
+    text-align: center;
+}
+
+.background-image {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Header */
+.header {
+	padding:10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header .logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: px;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.header p {
+    font-size: 1.2rem;
+}
+
+/* Info Section */
+.info-section {
+    padding: 20px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 900px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Description */
+.description {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Date and Time */
+.date-time {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.calendar, .clock {
+    padding: 20px;
+    background-color: #1a3e60;
+    color: #fff;
+    border-radius: 10px;
+    flex: 1;
+}
+
+.calendar h3, .clock h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* Language Selection Container */
+.language-selection-container {
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.language-selection-container h4 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.language-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.language-btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.language-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .header p {
+        font-size: 1rem;
+    }
+
+    .date-time {
+        flex-direction: column;
+    }
+
+    .language-selection-container h4 {
+        font-size: 1.2rem;
+    }
+
+    .language-btn {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+}

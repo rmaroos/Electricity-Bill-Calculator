@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Consumption</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>විදුලි පරිභෝජන කැල්ක්යුලේටරය</h2>
+        <label for="previousMeter">පෙර මනු කියවන්නා  (kWh):</label>
+        <input type="number" id="previousMeter" placeholder="පෙර මීටර කියවීම ඇතුළත් කරන්න">
+		<label for="currentMeter">වත්මන් මනු කියවන්නා  (kWh):</label>
+        <input type="number" id="currentMeter" placeholder="වත්මන් මීටර කියවීම ඇතුළත් කරන්න">
+        <button onclick="calculateConsumption()">පරිභෝජනය ගණනය කරන්න</button>
+        <p id="consumptionResult"> පරිභෝජනය:  <span id="consumption"></span> kWh</p>
+        <p id="errorMessage" style="color: red; font-size:13px;"></p>
+        <button id="calculateBillBtn" onclick="redirectToBillPage()" disabled>බිල්පත ගණනය කරන්න </button>
+        <button id="backBtn" onclick="goBack()">මුල් පිටුවට ආපසු යන්න</button>
+    </div>
+
+    <footer>
+        &copy; 2024 පහසු විදුලි බිල්පත් කැල්කියුලේටරය | කාර්යක්ෂම බලශක්ති කළමනාකරණය සඳහා නිර්මාණය කර ඇත
+    </footer>
+
+    <script>
+        function calculateConsumption() {
+            const currentMeter = parseFloat(document.getElementById('currentMeter').value);
+            const previousMeter = parseFloat(document.getElementById('previousMeter').value);
+            const errorMessage = document.getElementById('errorMessage');
+            const consumptionElement = document.getElementById('consumption');
+
+            errorMessage.innerText = "";
+            consumptionElement.innerText = "";
+
+            if (isNaN(currentMeter) || isNaN(previousMeter)) {
+                errorMessage.innerText = "කරුණාකර වලංගු මීටර කියවීම් ඇතුළත් කරන්න.";
+                return;
+            }
+
+            if (currentMeter < previousMeter) {
+                errorMessage.innerText = "දෝෂය: පෙර මීටර් කියවීම වත්මන් මීටර කියවීමට වඩා වැඩි විය නොහැක, කරුණාකර එය පරීක්ෂා කරන්න.";
+                return;
+            }
+
+            const consumption = currentMeter - previousMeter;
+            consumptionElement.innerText = consumption.toFixed(1);
+
+            if (consumption > 100) {
+                errorMessage.innerText = "අවවාදයයි: ඔබේ විදුලි පරිභෝජනය ඉහළයි.";
+            }
+
+            document.getElementById('calculateBillBtn').disabled = false;
+            localStorage.setItem('consumption', consumption.toFixed(0));
+            localStorage.setItem('previousMeter', currentMeter.toFixed(0));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedPreviousMeter = localStorage.getItem('previousMeter');
+            if (savedPreviousMeter) {
+                document.getElementById('previousMeter').value = savedPreviousMeter;
+            }
+        });
+
+        function redirectToBillPage() {
+            window.location.href = 'bill.html';
+        }
+
+        function goBack() {
+            window.location.href = '../Home/home.html'; 
+        }
+    </script>
+</body>
+</html>

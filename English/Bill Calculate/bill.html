@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Bill</title>
+    <link rel="stylesheet" href="bill.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Electricity Bill Calculator</h2>
+        <p id="consumptionDetails"></p>
+        <div id="calculationSteps"></div>
+        <p id="totalBill"></p>
+		<button id="backBtn" onclick="goBack()">Back to Home Page</button>
+		<button id="backBtn1" onclick="goTip()">How To Reduce the Electricity Consumption</button>
+    </div>
+
+    <script>
+        function calculateBill() {
+            const consumption = parseFloat(localStorage.getItem('consumption'));
+            let charge = 0;
+            let fixedCharge = 0;
+            let steps = [];
+
+            if (consumption <= 30) {
+                charge = consumption * 8.0;
+                fixedCharge = 150.00;
+                steps.push(`0 - ${consumption} kWh: ${consumption} * 8.0 = LKR ${charge.toFixed(2)}`);
+            } else if (consumption <= 60) {
+                charge = (30 * 8.0) + ((consumption - 30) * 20.0);
+                fixedCharge = 300.00;
+                steps.push(`0 - 30 kWh: 30 * 8.0 = LKR ${(30 * 8.0).toFixed(2)}`);
+                steps.push(`31 - ${consumption} kWh: ${(consumption - 30)} * 20.0 = LKR ${((consumption - 30) * 20.0).toFixed(2)}`);
+            } else if (consumption <= 90) {
+                charge = (60 * 25.0) + ((consumption - 60) * 30.0);
+                fixedCharge = 400.00;
+                steps.push(`0 - 60 kWh: 60 * 25.0 = LKR ${(60 * 25.0).toFixed(2)}`);
+                steps.push(`61 - ${consumption} kWh: ${(consumption - 60)} * 30.0 = LKR ${((consumption - 60) * 30.0).toFixed(2)}`);
+            } else if (consumption <= 120) {
+                charge = (60 * 25.0) + (30 * 30.0) + ((consumption - 90) * 50.0);
+                fixedCharge = 1000.00;
+                steps.push(`0 - 60 kWh: 60 * 25.0 = LKR ${(60 * 25.0).toFixed(2)}`);
+                steps.push(`61 - 90 kWh: 30 * 30.0 = LKR ${(30 * 30.0).toFixed(2)}`);
+                steps.push(`91 - ${consumption} kWh: ${(consumption - 90)} * 50.0 = LKR ${((consumption - 90) * 50.0).toFixed(2)}`);
+            } else {
+                charge = (60 * 25.0) + (30 * 30.0) + (30 * 50.0) + ((consumption - 120) * 75.0);
+                fixedCharge = 1000.00;
+                steps.push(`0 - 60 kWh: 60 * 25.0 = LKR ${(60 * 25.0).toFixed(2)}`);
+                steps.push(`61 - 90 kWh: 30 * 30.0 = LKR ${(30 * 30.0).toFixed(2)}`);
+                steps.push(`91 - 120 kWh: 30 * 50.0 = LKR ${(30 * 50.0).toFixed(2)}`);
+                steps.push(`121 - ${consumption} kWh: ${(consumption - 120)} * 75.0 = LKR ${((consumption - 120) * 75.0).toFixed(2)}`);
+            }
+
+            const totalBill = charge + fixedCharge;
+
+            document.getElementById('consumptionDetails').innerText = `Consumption: ${consumption} kWh`;
+            const stepsContainer = document.getElementById('calculationSteps');
+            steps.forEach(step => {
+                const p = document.createElement('p');
+                p.innerText = step;
+                stepsContainer.appendChild(p);
+            });
+            stepsContainer.appendChild(document.createElement('hr'));
+            stepsContainer.appendChild(document.createTextNode(`Fixed Charge: LKR ${fixedCharge.toFixed(2)}`));
+
+            document.getElementById('totalBill').innerText = `Total Bill: LKR ${totalBill.toFixed(2)}`;
+        }
+
+        calculateBill();
+		
+		function goBack() {
+            window.location.href = 'index.html';
+        }
+		
+		function goTip() {
+            window.location.href = '../Tips/Tips.html'; // Add the tips page
+        }
+		
+    </script>
+	<footer>
+        &copy; 2024 Easy Electricity Bill Calculator | Designed for efficient energy management
+    </footer>
+</body>
+</html>
